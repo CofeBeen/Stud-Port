@@ -1,1 +1,5 @@
+#include <iostream>
 
+std::cout << "Hello World";
+std::cout << "Genisus";
+std::cout << "Skibidi";
