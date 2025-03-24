@@ -23,7 +23,7 @@ void studName(const StudProf& profile){
     head = newNode;
 }
 
-void displayMenu(){
+void displayMenu(){//displaying the menu of our program by being in a function that can be called and looped
     int userInput;
     cout << "Welcome to Group# Student Portal\n";
     cout << "-----------------------------------------\n";
@@ -42,7 +42,7 @@ void displayMenu(){
 
 }
 
-void exitProgram(){
+void exitProgram(){//display the exit and the authors of our program
     cout << "Thank you for using Group# Student Portal\n";
     cout << "Group Members:\n";
     cout << "-----------------------------------------\n";
@@ -58,7 +58,7 @@ int main(){
     do{
         displayMenu();
         cin >> userInput;
-        /*switch(userInput){
+        /*switch(userInput){ this will be where the functions will be called when a user picked from the choices
             case 1: 
             case 2:
             case 3:
