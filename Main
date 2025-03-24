@@ -3,5 +3,22 @@
 using namespace std;
 
 struct StudProf{
-  
+  string name;
+  int age;
+  int grade_lev;
+  string course;
+};
+
+struct Node{
+  StudProf profile;
+  Node *next;
+};
+
+Node *head = nullptr;
+
+void studName(const StudProf& profile){
+  Node *newNode = newNode;
+  newNode->profile - profile;
+  newNode->next = head;
+  head = newNode;
 }
