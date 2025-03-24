@@ -10,45 +10,63 @@ struct StudProf{
 };
 
 struct Node{
-  StudProf profile;
-  Node *next;
+    StudProf profile;
+    Node *next;
 };
 
 Node *head = nullptr;
 
 void studName(const StudProf& profile){
-  Node *newNode = newNode;
-  newNode->profile - profile;
-  newNode->next = head;
-  head = newNode;
+    Node *newNode = newNode;
+    newNode->profile = profile;
+    newNode->next = head;
+    head = newNode;
 }
 
 void displayMenu(){
-  cout << "Welcome to Group# Student Portal\n";
-  cout << "-----------------------------------------\n"
-  cout << "Pick from the numerous choices:\n";
-  cout << "1. Add Record\n";
-  cout << "2. Add Record\n";
-  cout << "3. Add Record\n";
-  cout << "4. Add Record\n";
-  cout << "5. Add Record\n";
-  cout << "6. Add Record\n";
-  cout << "7. Add Record\n";
-  cout << "-----------------------------------------\n"
-  cout << "Please Type Your Choice:\n";
-  cout << "-----------------------------------------\n"
+    int userInput;
+    cout << "Welcome to Group# Student Portal\n";
+    cout << "-----------------------------------------\n";
+    cout << "Pick from the numerous choices:\n";
+    cout << "-----------------------------------------\n";
+    cout << "1. Add Records\n";
+    cout << "2. Search Records\n";
+    cout << "3. Display All Records\n";
+    cout << "4. Display Specific Records\n";
+    cout << "5. Delete Record\n";
+    cout << "6. Exit\n";
+    cout << "-----------------------------------------\n";
+    cout << "Please Type Your Choice:\n";
+    cout << "-----------------------------------------\n";
+
 
 }
 
 void exitProgram(){
-  cout << "Thank you for using Group# Student Portal\n";
-  cout << "Group Members:\n";
-  cout << "1. Azarraga, Dwayne Antoine Benjamin C.\n";
-  cout << "2. Eleptico, Genesis Rilly C.\n";
-  cout << "3. Pascual, Shaun Robert T.\n";
-  cout << "4. Soriano, Jermaine Rikko C.\n";
+    cout << "Thank you for using Group# Student Portal\n";
+    cout << "Group Members:\n";
+    cout << "-----------------------------------------\n";
+    cout << "1. Azarraga, Dwayne Antoine Benjamin C.\n";
+    cout << "2. Eleptico, Genesis Rilly C.\n";
+    cout << "3. Pascual, Shaun Robert T.\n";
+    cout << "4. Soriano, Jermaine Rikko C.\n";
+    cout << "-----------------------------------------\n";
 }
 
 int main(){
+    int userInput;
+    do{
+        displayMenu();
+        cin >> userInput;
+        /*switch(userInput){
+            case 1: 
+            case 2:
+            case 3:
+            case 4:
+            case 5:
+            case 6:
+        }*/
+    }while(userInput!=6);
+    
   return 0;
 }
