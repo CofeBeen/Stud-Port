@@ -1,3 +1,7 @@
-commit to the bit
+#include <iostream>
+#include <string>
+using namespace std;
 
-youkoso mina-san
+struct StudProf{
+  
+}
