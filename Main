@@ -21,47 +21,11 @@ struct Node{
 
 Node *head = nullptr;
 
-<<<<<<< HEAD
 void studName(const StudProf& profile){
     Node *newNode = new Node;
     newNode->profile = profile;
     newNode->next = head;
     head = newNode;
-=======
-void addRecord(fstream &file){
-    StudProf newStudent;
-    count << "Enter Student ID: ";
-    cin >> newStudent.studentID;
-    cin.ignore();
-
-    cout << "Enter Full Name: ";
-    getlne(cin, newStudent.name);
-
-    cout << "Enter Birthday (YYYY|MM|DD): ";
-    getlne(cin, newStudent.birthday);
-
-    cout << "Enter Address: ";
-    getlne(cin, newStudent.address);
-
-    cout << "Enter Gender: ";
-    getlne(cin, newStudent.gender);
-
-    cout << "Enter Degree Program (e.g Bachelor of Science in Computer Science): ";
-    getlne(cin, newStudent.degreeProgram);
-
-    cout << "Enter Year Level: ";
-    getlne(cin, newStudent.yearLevel);
-
-    file << newStudent.name << "," << newStudent.birthday << "," << newStudent.address << "," 
-    << newStudent.gender << "," << newStudent.degree << "," << newStudent.yearLevel << '\n';
-
-    cout << "Record Added Successfully!\n";
-}
-newstudent.id
-
-
-void searchRec(){
->>>>>>> 171e188358a9030818e8bdb2bccd55b9d087805d
 }
 
 void allRec(){
@@ -121,7 +85,30 @@ void addRecord(fstream &file){
 }
 
 
-//searchRecord(file);
+void searchRecord() {
+    string id;
+    cout << "Enter Student ID: ";
+    cin.ignore(); // Clear newline character left in the buffer
+    getline(cin, id);
+
+    Node *current = head;
+    while (current != nullptr) {
+        if (current->profile.id == id) {
+            cout << "Student Found:\n";
+            cout << "ID: " << current->profile.id << "\n";
+            cout << "Name: " << current->profile.name << "\n";
+            cout << "Birthday: " << current->profile.birthday << "\n";
+            cout << "Address: " << current->profile.address << "\n";
+            cout << "Gender: " << current->profile.gender << "\n";
+            cout << "Degree Program: " << current->profile.degreeProgram << "\n";
+            cout << "Year Level: " << current->profile.yearLevel << "\n";
+            return; // 
+        }
+        current = current->next;
+    }
+    cout << "Student record not found.\n";
+}
+
 void displayRecords(){
     cout << left << setw(10) << "ID" << setw(20) << "Name" << setw(15) << "Birthday" << setw(20) 
          << "Address" << setw(10) << "Gender" << setw(20) << "Degree Program" << setw(10) << "Year Level" << "\n";
