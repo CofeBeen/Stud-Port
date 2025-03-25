@@ -2,41 +2,93 @@
 #include <string>
 #include <fstream>
 #include <iomanip>
+#include <sstream> 
 using namespace std;
 
-struct StudProf{
-  string id;
-  string name;
-  string birthday;
-  string address;
-  string gender;
-  string degreeProgram;
-  int yearLevel;
+struct StudProf {
+    string id;
+    string name;
+    string birthday;
+    string address;
+    string gender;
+    string degreeProgram;
+    int yearLevel;
 };
 
-struct Node{
+struct Node {
     StudProf profile;
     Node *next;
 };
 
 Node *head = nullptr;
 
-void studName(const StudProf& profile){
+void loadDataFromFile(fstream &file) {
+    file.open("student.txt", ios::in);
+    if (!file) {
+        cout << "Error opening file.\n";
+        return;
+    }
+    
+    string line;
+    while (getline(file, line)) {
+        stringstream ss(line);
+        StudProf newStudent;
+        string temp;
+        
+        getline(ss, newStudent.id, ',');
+        getline(ss, newStudent.name, ',');
+        getline(ss, newStudent.birthday, ',');
+        getline(ss, newStudent.address, ',');
+        getline(ss, newStudent.gender, ',');
+        getline(ss, newStudent.degreeProgram, ',');
+        getline(ss, temp, ',');
+        newStudent.yearLevel = stoi(temp);
+        
+        Node *newNode = new Node;
+        newNode->profile = newStudent;
+        newNode->next = head;
+        head = newNode;
+    }
+    file.close();
+}
+
+void studName(const StudProf& profile) {
     Node *newNode = new Node;
     newNode->profile = profile;
     newNode->next = head;
     head = newNode;
 }
 
-void displayMenu(){//displaying the menu of our program by being in a function that can be called and looped [shaun]
+void saveToFile() {
+    // Open the file for writing. If it exists, it will be overwritten.
+    ofstream file("students.txt");
+    if (!file) {
+        cout << "Error opening file for saving.\n";
+        return;
+    }
+
+    // Write each student's data to the file
+    Node *current = head;
+    while (current != nullptr) {
+        file << current->profile.id << ","
+             << current->profile.name << ","
+             << current->profile.birthday << ","
+             << current->profile.address << ","
+             << current->profile.gender << ","
+             << current->profile.degreeProgram << ","
+             << current->profile.yearLevel << "\n";
+        current = current->next;
+    }
+
+    file.close(); // Close the file
+    cout << "Records saved to file successfully.\n";
+}
+
+void displayMenu() {
     int userInput;
-<<<<<<< Updated upstream
     cout << "Welcome to Group# Student Portal\n"; // AEPS ipangalan natin, any thoughts and feelings? [oms by shaun]
-=======
-    cout << "Welcome to AEPS Student Portal\n"; // AEPS ipangalan natin, any thoughts and feelings? [oms by shaun]
->>>>>>> Stashed changes
     cout << "-----------------------------------------\n";
-    cout << "Pick from the numerous choices:\n";
+    cout << "What do you want to do?\n";
     cout << "-----------------------------------------\n";
     cout << "1. Add Records\n";
     cout << "2. Search Records\n";
@@ -45,11 +97,11 @@ void displayMenu(){//displaying the menu of our program by being in a function t
     cout << "5. Delete Record\n";
     cout << "6. Exit\n";
     cout << "-----------------------------------------\n";
-    cout << "Please Type Your Choice:\n";
+    cout << "Please Type Your Selection:\n";
     cout << "-----------------------------------------\n";
 }
 
-void addRecords(fstream &file){
+void addRecords(){
     StudProf newStudent;
     cout << "Enter Student ID: ";
     cin >> newStudent.id;
@@ -72,22 +124,21 @@ void addRecords(fstream &file){
 
     cout << "Enter Year Level: ";
     cin >> newStudent.yearLevel; //ginawa kong cin kasi integer datatype lang naman [shaun]
-    
-    file << newStudent.name << "," << newStudent.birthday << "," << newStudent.address << "," 
-    << newStudent.gender << "," << newStudent.degreeProgram << "," << newStudent.yearLevel << '\n';
+    cin.ignore(); //para maclear natin para sa next input kemi [shaun]
 
+    studName(newStudent); //add nating yung student sa 
+    saveToFile(); 
     cout << "Record Added Successfully!\n";
 }
 
-
-void searchRecords() {
+void searchRecords(fstream &file) {
     string id;
     cout << "Enter Student ID: ";
-    cin.ignore(); // kinilear nito yung line [shaun]
+    cin.ignore();
     getline(cin, id);
 
     Node *current = head;
-    while (current != nullptr) {//loop neto yung linked list until sa tail[shaun]
+    while (current != nullptr) {
         if (current->profile.id == id) {
             cout << "Student Found:\n";
             cout << "ID: " << current->profile.id << "\n";
@@ -97,40 +148,53 @@ void searchRecords() {
             cout << "Gender: " << current->profile.gender << "\n";
             cout << "Degree Program: " << current->profile.degreeProgram << "\n";
             cout << "Year Level: " << current->profile.yearLevel << "\n";
-            return; // 
+            return;
         }
         current = current->next;
     }
     cout << "Student record not found.\n";
 }
 
-void displayRecords(){
-    cout << left << setw(10) << "ID" << setw(20) << "Name" << setw(15) << "Birthday" << setw(20) 
-         << "Address" << setw(10) << "Gender" << setw(20) << "Degree Program" << setw(10) << "Year Level" << "\n";
+void displayRecords() {
+    cout << left << setw(12) << "ID"
+         << setw(30) << "Name"
+         << setw(15) << "Birthday"
+         << setw(30) << "Address"
+         << setw(10) << "Gender"
+         << setw(30) << "Degree Program"
+         << setw(12) << "Year Level" << endl;
+
+    cout << string(12, '-') << " "
+         << string(30, '-') << " "
+         << string(15, '-') << " "
+         << string(30, '-') << " "
+         << string(10, '-') << " "
+         << string(30, '-') << " "
+         << string(12, '-') << endl;
 
     Node *current = head;
-    while (current != nullptr) {//loop neto yung linked list until sa tail[shaun]
-        cout << left << setw(10) << current->profile.id 
-             << setw(20) << current->profile.name 
-             << setw(15) << current->profile.birthday 
-             << setw(20) << current->profile.address 
-             << setw(10) << current->profile.gender 
-             << setw(20) << current->profile.degreeProgram 
-             << setw(10) << current->profile.yearLevel << "\n";
-        current = current->next;
+    while (current != nullptr) {
+        cout << left << setw(12) << current->profile.id
+             << setw(30) << current->profile.name
+             << setw(15) << current->profile.birthday
+             << setw(30) << current->profile.address
+             << setw(10) << current->profile.gender
+             << setw(30) << current->profile.degreeProgram
+             << setw(12) << current->profile.yearLevel << endl;
+
+        current = current->next; 
     }
 }
 
-void displaySpecificRecord(){
+void displaySpecificRecord() {
     string id;
     cout << "Enter Student ID to search: ";
-    cin.ignore();  //pang clear ng buffer
+    cin.ignore();
     getline(cin, id);
 
     Node *current = head;
     bool found = false;
 
-    // panghanap ng specific record pag nag match yung id
     while (current != nullptr) {
         if (current->profile.id == id) {
             cout << "Student Found:\n";
@@ -155,24 +219,24 @@ void displaySpecificRecord(){
 void deleteRecords(fstream &file) {
     string id;
     cout << "Input an ID Number to delete: ";
-    cin.ignore(); //
+    cin.ignore();
     getline(cin, id);
 
     Node *current = head;
     Node *previous = nullptr;
 
     while (current != nullptr) {
-        if (current->profile.id == id) { // check niya if match ba yung id sa databse natin [shaun]
+        if (current->profile.id == id) {
             if (previous == nullptr) {
-                head = current->next; //ito kung dedelete natin yung head node pag nagmatch sa id [shaun]
+                head = current->next;
             } else {
-                previous->next = current->next; //ito parang niskip natin yung current node dahil ididelete na sya e [shaun]
+                previous->next = current->next;
             }
-            delete current; // ito ifefree nya yung memory dahil dinelete na natin yung node e [shaun]
+            delete current;
             cout << "Record with ID " << id << " deleted successfully.\n";
-            return; 
+            return;
         }
-        previous = current; // ito momove na nating yung previous node na dinelete natin sa current [shaun]
+        previous = current;
         current = current->next;
     }
 
@@ -181,7 +245,7 @@ void deleteRecords(fstream &file) {
 
 
 void exitProgram(){//display neto yung exit program natin [shaun]
-    cout << "Thank you for using AEPS Student Portal\n";
+    cout << "Thank you for using Group# Student Portal\n";
     cout << "Group Members:\n";
     cout << "-----------------------------------------\n";
     cout << "1. Azarraga, Dwayne Antoine Benjamin C.\n";
@@ -191,33 +255,31 @@ void exitProgram(){//display neto yung exit program natin [shaun]
     cout << "-----------------------------------------\n";
 }
 
-int main(){
-    fstream file("student.txt", ios::in | ios::out | ios::app);
-    if (!file){//kung hindi makita yung file [shaun]
-        cout << "unable to open file." << endl;
-        return 1;
-    }
+int main() {
+    fstream file;
+    loadDataFromFile(file);
 
-    int choice=0;
+    int choice = 0;
 
-    while (true){
+    while (true) {
         displayMenu();
-        if (!(cin >> choice)){ // tas check nito if meron invalid input [shaun]
-            cin.clear(); // Clear nya yung error flag [shaun]
-            cin.ignore(); // Ignore nya yung invalid input [shaun]
+        if (!(cin >> choice)) {
+            cin.clear();
+            cin.ignore();
             cout << "Invalid input. Please enter a valid choice.\n";
             continue;
         }
-        switch (choice){
-            case 1: addRecords(file); break;
-            case 2: searchRecords(); break;
+
+        switch (choice) {
+            case 1: addRecords(); break;
+            case 2: searchRecords(file); break;
             case 3: displayRecords(); break;
-            case 4: deleteRecords(file); break;
-            case 5:
+            case 4: displaySpecificRecord(); break;
+            case 5: deleteRecords(file); break;
+            case 6:
                 exitProgram();
                 file.close();
                 return 0;
-            
             default:
                 cout << "Invalid choice, please try again." << endl;
         }
