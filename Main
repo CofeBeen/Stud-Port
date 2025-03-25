@@ -29,7 +29,6 @@ void studName(const StudProf& profile){
 }
 
 void displayMenu(){//displaying the menu of our program by being in a function that can be called and looped [shaun]
-    int userInput;
     cout << "Welcome to Group# Student Portal\n"; // AEPS ipangalan natin, any thoughts and feelings? [oms by shaun]
     cout << "-----------------------------------------\n";
     cout << "Pick from the numerous choices:\n";
