@@ -45,7 +45,7 @@ void displayMenu(){//displaying the menu of our program by being in a function t
     cout << "-----------------------------------------\n";
 }
 
-void addRecord(fstream &file){
+void addRecords(fstream &file){
     StudProf newStudent;
     cout << "Enter Student ID: ";
     cin >> newStudent.id;
@@ -76,7 +76,7 @@ void addRecord(fstream &file){
 }
 
 
-void searchRecord() {
+void searchRecords() {
     string id;
     cout << "Enter Student ID: ";
     cin.ignore(); // kinilear nito yung line [shaun]
@@ -117,7 +117,7 @@ void displayRecords(){
     }
 }
 
-void deleteRecord(fstream &file) {
+void deleteRecords(fstream &file) {
     string id;
     cout << "Input an ID Number to delete: ";
     cin.ignore(); // 
@@ -174,12 +174,11 @@ int main(){
             continue;
         }
         switch (choice){
-            case 1: addRecord(file); break;
-            case 2: searchRecord(file); break;
+            case 1: addRecords(file); break;
+            case 2: searchRecords(file); break;
             case 3: displayRecords(file); break;
-            //case 4: displayRecords(file); break;
-            //case 5: deleteRecord(file); break;
-            case 6:
+            case 4: deleteRecords(file); break;
+            case 5:
                 //exitProgram(file);
                 file.close();
                 return 0;
