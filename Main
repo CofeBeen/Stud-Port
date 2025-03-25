@@ -1,10 +1,11 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <iomanip>
 using namespace std;
 
 struct StudProf{
-  string studentID;
+  string id;
   string name;
   string birthday;
   string address;
@@ -20,6 +21,13 @@ struct Node{
 
 Node *head = nullptr;
 
+<<<<<<< HEAD
+void studName(const StudProf& profile){
+    Node *newNode = new Node;
+    newNode->profile = profile;
+    newNode->next = head;
+    head = newNode;
+=======
 void addRecord(fstream &file){
     StudProf newStudent;
     count << "Enter Student ID: ";
@@ -53,6 +61,7 @@ newstudent.id
 
 
 void searchRec(){
+>>>>>>> 171e188358a9030818e8bdb2bccd55b9d087805d
 }
 
 void allRec(){
@@ -79,9 +88,59 @@ void displayMenu(){//displaying the menu of our program by being in a function t
     cout << "-----------------------------------------\n";
     cout << "Please Type Your Choice:\n";
     cout << "-----------------------------------------\n";
-
-
 }
+
+void addRecord(fstream &file){
+    StudProf newStudent;
+    cout << "Enter Student ID: ";
+    cin >> newStudent.id;
+    cin.ignore();
+
+    cout << "Enter Full Name: ";
+    getline(cin, newStudent.name);
+
+    cout << "Enter Birthday (YYYY|MM|DD): ";
+    getline(cin, newStudent.birthday);
+
+    cout << "Enter Address: ";
+    getline(cin, newStudent.address);
+
+    cout << "Enter Gender: ";
+    getline(cin, newStudent.gender);
+
+    cout << "Enter Degree Program (e.g Bachelor of Science in Computer Science): ";
+    getline(cin, newStudent.degreeProgram);
+
+    cout << "Enter Year Level: ";
+    cin >> newStudent.yearLevel; //because it is only an integer datatype
+    
+    file << newStudent.name << "," << newStudent.birthday << "," << newStudent.address << "," 
+    << newStudent.gender << "," << newStudent.degreeProgram << "," << newStudent.yearLevel << '\n';
+
+    cout << "Record Added Successfully!\n";
+}
+
+
+//searchRecord(file);
+void displayRecords(){
+    cout << left << setw(10) << "ID" << setw(20) << "Name" << setw(15) << "Birthday" << setw(20) 
+         << "Address" << setw(10) << "Gender" << setw(20) << "Degree Program" << setw(10) << "Year Level" << "\n";
+
+    Node *current = head;
+    while (current != nullptr) {
+        cout << left << setw(10) << current->profile.id 
+             << setw(20) << current->profile.name 
+             << setw(15) << current->profile.birthday 
+             << setw(20) << current->profile.address 
+             << setw(10) << current->profile.gender 
+             << setw(20) << current->profile.degreeProgram 
+             << setw(10) << current->profile.yearLevel << "\n";
+        current = current->next;
+    }
+}
+
+//deleteRecord(file); 
+
 
 void exitProgram(){//display the exit and the authors of our program
     cout << "Thank you for using Group# Student Portal\n";
@@ -95,49 +154,35 @@ void exitProgram(){//display the exit and the authors of our program
 }
 
 int main(){
-
     fstream file("student.txt", ios::in | ios::out | ios::app);
     if (!file){
         cout << "unable to open file." << endl;
         return 1;
     }
 
-    int choice;
+    int choice=0;
 
-    while (true)
-    {
-      displayMenu();
-
-    if(!(cin >> choice)){
-            handleInvalidInput();
+    while (true){
+        displayMenu();
+        if (!(cin >> choice)){ // Check for invalid input
+            cin.clear(); // Clear the error flag
+            cin.ignore(); // Ignore invalid input
+            cout << "Invalid input. Please enter a valid choice.\n";
             continue;
         }
-        
-        int choice;
-        switch (choice)
-        {
-        case 1
-            addRecord(file);
-            break;
-        case 2
-            searchRecord(file);
-            break;
-        case 3
-            displayRecords(file);
-            break;
-        case 4
-            displayRecords(file);
-            break;
-        case 5
-            deleteRecord(file);
-            break;
-        case 6
-            exitProgram(file);
-            file.close();
-            return 0;
-    
-        default:
-            cout << "Invalid choice, please try again." << endl;
+        switch (choice){
+            case 1: addRecord(file); break;
+            //case 2: searchRecord(file); break;
+            //case 3: displayRecords(file); break;
+            //case 4: displayRecords(file); break;
+            //case 5: deleteRecord(file); break;
+            case 6:
+                //exitProgram(file);
+                file.close();
+                return 0;
+            
+            default:
+                cout << "Invalid choice, please try again." << endl;
         }
     }
 
@@ -145,3 +190,4 @@ int main(){
     exitProgram();
     return 0;
 }
+
