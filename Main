@@ -83,7 +83,7 @@ void searchRecords() {
     getline(cin, id);
 
     Node *current = head;
-    while (current != nullptr) {
+    while (current != nullptr) {//loop neto yung linked list until sa tail[shaun]
         if (current->profile.id == id) {
             cout << "Student Found:\n";
             cout << "ID: " << current->profile.id << "\n";
@@ -105,7 +105,7 @@ void displayRecords(){
          << "Address" << setw(10) << "Gender" << setw(20) << "Degree Program" << setw(10) << "Year Level" << "\n";
 
     Node *current = head;
-    while (current != nullptr) {
+    while (current != nullptr) {//loop neto yung linked list until sa tail[shaun]
         cout << left << setw(10) << current->profile.id 
              << setw(20) << current->profile.name 
              << setw(15) << current->profile.birthday 
@@ -158,7 +158,7 @@ void exitProgram(){//display neto yung exit program natin [shaun]
 
 int main(){
     fstream file("student.txt", ios::in | ios::out | ios::app);
-    if (!file){
+    if (!file){//kung hindi makita yung file [shaun]
         cout << "unable to open file." << endl;
         return 1;
     }
