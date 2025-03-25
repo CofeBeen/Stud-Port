@@ -116,6 +116,37 @@ void displayRecords(){
     }
 }
 
+void displaySpecificRecord(){
+    string id;
+    cout << "Enter Student ID to search: ";
+    cin.ignore();  //pang clear ng buffer
+    getline(cin, id);
+
+    Node *current = head;
+    bool found = false;
+
+    // panghanap ng specific record pag nag match yung id
+    while (current != nullptr) {
+        if (current->profile.id == id) {
+            cout << "Student Found:\n";
+            cout << "ID: " << current->profile.id << "\n";
+            cout << "Name: " << current->profile.name << "\n";
+            cout << "Birthday: " << current->profile.birthday << "\n";
+            cout << "Address: " << current->profile.address << "\n";
+            cout << "Gender: " << current->profile.gender << "\n";
+            cout << "Degree Program: " << current->profile.degreeProgram << "\n";
+            cout << "Year Level: " << current->profile.yearLevel << "\n";
+            found = true;
+            break;
+        }
+        current = current->next;
+    }
+
+    if (!found) {
+        cout << "No student found with ID: " << id << endl;
+    }
+}
+
 void deleteRecords(fstream &file) {
     string id;
     cout << "Input an ID Number to delete: ";
