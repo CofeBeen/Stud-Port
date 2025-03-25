@@ -68,10 +68,17 @@ void addRecords(fstream &file){
 
     cout << "Enter Year Level: ";
     cin >> newStudent.yearLevel; //ginawa kong cin kasi integer datatype lang naman [shaun]
+
+    file.open("student.txt", ios::out | ios::app);
+    if (!file){
+        cout << "Error opening file.\n";
+        return;
+    }
     
     file << newStudent.name << "," << newStudent.birthday << "," << newStudent.address << "," 
     << newStudent.gender << "," << newStudent.degreeProgram << "," << newStudent.yearLevel << '\n';
 
+    file.close();
     cout << "Record Added Successfully!\n";
 }
 
