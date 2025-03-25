@@ -51,6 +51,19 @@ void addRecord(fstream &file){
 }
 newstudent.id
 
+
+void searchRec(){
+}
+
+void allRec(){
+}
+
+void specRec(){
+}
+
+void delRec(){
+}
+
 void displayMenu(){//displaying the menu of our program by being in a function that can be called and looped
     int userInput;
     cout << "Welcome to Group# Student Portal\n"; // AEPS ipangalan natin, any thoughts and feelings?
