@@ -126,7 +126,32 @@ void displayRecords(){
     }
 }
 
-//deleteRecord(file); 
+void deleteRecord(fstream &file) {
+    string id;
+    cout << "Input an ID Number to delete: ";
+    cin.ignore(); // 
+    getline(cin, id);
+
+    Node *current = head;
+    Node *previous = nullptr;
+
+    while (current != nullptr) {
+        if (current->profile.id == id) { // check niya if match ba yung id sa databse natin [shaun]
+            if (previous == nullptr) {
+                head = current->next; //ito kung dedelete natin yung head node pag nagmatch sa id [shaun]
+            } else {
+                previous->next = current->next; //ito parang niskip natin yung current node dahil ididelete na sya e [shaun]
+            }
+            delete current; // ito ifefree nya yung memory dahil dinelete na natin yung node e [shaun]
+            cout << "Record with ID " << id << " deleted successfully.\n";
+            return; 
+        }
+        previous = current; // ito momove na nating yung previous node na dinelete natin sa current [shaun]
+        current = current->next;
+    }
+
+    cout << "Record with ID " << id << " not found.\n";
+}
 
 
 void exitProgram(){//display neto yung exit program natin [shaun]
