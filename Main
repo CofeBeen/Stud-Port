@@ -120,7 +120,7 @@ void displayRecords(){
 void deleteRecords(fstream &file) {
     string id;
     cout << "Input an ID Number to delete: ";
-    cin.ignore(); // 
+    cin.ignore(); //
     getline(cin, id);
 
     Node *current = head;
