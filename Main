@@ -37,9 +37,9 @@ void specRec(){
 void delRec(){
 }
 
-void displayMenu(){//displaying the menu of our program by being in a function that can be called and looped
+void displayMenu(){//displaying the menu of our program by being in a function that can be called and looped [shaun]
     int userInput;
-    cout << "Welcome to Group# Student Portal\n"; // AEPS ipangalan natin, any thoughts and feelings?
+    cout << "Welcome to Group# Student Portal\n"; // AEPS ipangalan natin, any thoughts and feelings? [oms by shaun]
     cout << "-----------------------------------------\n";
     cout << "Pick from the numerous choices:\n";
     cout << "-----------------------------------------\n";
@@ -76,7 +76,7 @@ void addRecord(fstream &file){
     getline(cin, newStudent.degreeProgram);
 
     cout << "Enter Year Level: ";
-    cin >> newStudent.yearLevel; //because it is only an integer datatype
+    cin >> newStudent.yearLevel; //ginawa kong cin kasi integer datatype lang naman [shaun]
     
     file << newStudent.name << "," << newStudent.birthday << "," << newStudent.address << "," 
     << newStudent.gender << "," << newStudent.degreeProgram << "," << newStudent.yearLevel << '\n';
@@ -88,7 +88,7 @@ void addRecord(fstream &file){
 void searchRecord() {
     string id;
     cout << "Enter Student ID: ";
-    cin.ignore(); // Clear newline character left in the buffer
+    cin.ignore(); // kinilear nito yung line [shaun]
     getline(cin, id);
 
     Node *current = head;
@@ -129,7 +129,7 @@ void displayRecords(){
 //deleteRecord(file); 
 
 
-void exitProgram(){//display the exit and the authors of our program
+void exitProgram(){//display neto yung exit program natin [shaun]
     cout << "Thank you for using Group# Student Portal\n";
     cout << "Group Members:\n";
     cout << "-----------------------------------------\n";
@@ -151,16 +151,16 @@ int main(){
 
     while (true){
         displayMenu();
-        if (!(cin >> choice)){ // Check for invalid input
-            cin.clear(); // Clear the error flag
-            cin.ignore(); // Ignore invalid input
+        if (!(cin >> choice)){ // tas check nito if meron invalid input [shaun]
+            cin.clear(); // Clear nya yung error flag [shaun]
+            cin.ignore(); // Ignore nya yung invalid input [shaun]
             cout << "Invalid input. Please enter a valid choice.\n";
             continue;
         }
         switch (choice){
             case 1: addRecord(file); break;
-            //case 2: searchRecord(file); break;
-            //case 3: displayRecords(file); break;
+            case 2: searchRecord(file); break;
+            case 3: displayRecords(file); break;
             //case 4: displayRecords(file); break;
             //case 5: deleteRecord(file); break;
             case 6:
