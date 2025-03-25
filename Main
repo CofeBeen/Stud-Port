@@ -179,7 +179,7 @@ int main(){
             case 3: displayRecords(file); break;
             case 4: deleteRecords(file); break;
             case 5:
-                //exitProgram(file);
+                exitProgram(file);
                 file.close();
                 return 0;
             
