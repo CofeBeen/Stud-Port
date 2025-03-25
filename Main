@@ -21,9 +21,9 @@ struct Node{
 Node *head = nullptr;
 
 void addRecord(fstream &file){
-    Student newStudent;
+    StudProf newStudent;
     count << "Enter Student ID: ";
-    cin >> newStudent.id;
+    cin >> newStudent.studentID;
     cin.ignore();
 
     cout << "Enter Full Name: ";
@@ -39,24 +39,17 @@ void addRecord(fstream &file){
     getlne(cin, newStudent.gender);
 
     cout << "Enter Degree Program (e.g Bachelor of Science in Computer Science): ";
-    getlne(cin, newStudent.degree);
+    getlne(cin, newStudent.degreeProgram);
 
     cout << "Enter Year Level: ";
-    getlne(cin, newStudent.year_level);
+    getlne(cin, newStudent.yearLevel);
 
     file << newStudent.name << "," << newStudent.birthday << "," << newStudent.address << "," 
-    << newStudent.gender << "," << newStudent.degree << "," << newStudent.year_level << '\n';
+    << newStudent.gender << "," << newStudent.degree << "," << newStudent.yearLevel << '\n';
 
     cout << "Record Added Successfully!\n";
 }
 newstudent.id
-
-void studName(const StudProf& profile){
-    Node *newNode = newNode;
-    newNode->profile = profile;
-    newNode->next = head;
-    head = newNode;
-}
 
 void displayMenu(){//displaying the menu of our program by being in a function that can be called and looped
     int userInput;
@@ -100,15 +93,7 @@ int main(){
 
     while (true)
     {
-        cout << "\nWelcome to Group Pr0gr@mm@z Student Information System" << endl;
-        cout << "What do you want to do" << endl;
-        cout << "1. Add New Record" << endl;
-        cout << "2. Search Record" << endl;
-        cout << "3. Display All Records" << endl;
-        cout << "4. Display Specific Records" << endl;
-        cout << "5. Delete Records" << endl;
-        cout << "6. Exit" << endl;
-        cout << "\nPlease Type Your Selection: ";
+      displayMenu();
 
     if(!(cin >> choice)){
             handleInvalidInput();
@@ -144,5 +129,6 @@ int main(){
     }
 
     file.close();
+    exitProgram();
     return 0;
 }
