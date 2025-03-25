@@ -20,6 +20,37 @@ struct Node{
 
 Node *head = nullptr;
 
+void addRecord(fstream &file){
+    Student newStudent;
+    count << "Enter Student ID: ";
+    cin >> newStudent.id;
+    cin.ignore();
+
+    cout << "Enter Full Name: ";
+    getlne(cin, newStudent.name);
+
+    cout << "Enter Birthday (YYYY|MM|DD): ";
+    getlne(cin, newStudent.birthday);
+
+    cout << "Enter Address: ";
+    getlne(cin, newStudent.address);
+
+    cout << "Enter Gender: ";
+    getlne(cin, newStudent.gender);
+
+    cout << "Enter Degree Program (e.g Bachelor of Science in Computer Science): ";
+    getlne(cin, newStudent.degree);
+
+    cout << "Enter Year Level: ";
+    getlne(cin, newStudent.year_level);
+
+    file << newStudent.name << "," << newStudent.birthday << "," << newStudent.address << "," 
+    << newStudent.gender << "," << newStudent.degree << "," << newStudent.year_level << '\n';
+
+    cout << "Record Added Successfully!\n";
+}
+newstudent.id
+
 void studName(const StudProf& profile){
     Node *newNode = newNode;
     newNode->profile = profile;
@@ -58,19 +89,60 @@ void exitProgram(){//display the exit and the authors of our program
 }
 
 int main(){
-    int userInput;
-    do{
-        displayMenu();
-        cin >> userInput;
-        /*switch(userInput){ this will be where the functions will be called when a user picked from the choices
-            case 1: 
-            case 2:
-            case 3:
-            case 4:
-            case 5:
-            case 6:
-        }*/
-    }while(userInput!=6);
+
+    fstream file("student.txt", ios::in | ios::out | ios::app);
+    if (!file){
+        cout << "unable to open file." << endl;
+        return 1;
+    }
+
+    int choice;
+
+    while (true)
+    {
+        cout << "\nWelcome to Group Pr0gr@mm@z Student Information System" << endl;
+        cout << "What do you want to do" << endl;
+        cout << "1. Add New Record" << endl;
+        cout << "2. Search Record" << endl;
+        cout << "3. Display All Records" << endl;
+        cout << "4. Display Specific Records" << endl;
+        cout << "5. Delete Records" << endl;
+        cout << "6. Exit" << endl;
+        cout << "\nPlease Type Your Selection: ";
+
+    if(!(cin >> choice)){
+            handleInvalidInput();
+            continue;
+        }
+        
+        int choice;
+        switch (choice)
+        {
+        case 1
+            addRecord(file);
+            break;
+        case 2
+            searchRecord(file);
+            break;
+        case 3
+            displayRecords(file);
+            break;
+        case 4
+            displayRecords(file);
+            break;
+        case 5
+            deleteRecord(file);
+            break;
+        case 6
+            exitProgram(file);
+            file.close();
+            return 0;
     
-  return 0;
+        default:
+            cout << "Invalid choice, please try again." << endl;
+        }
+    }
+
+    file.close();
+    return 0;
 }
