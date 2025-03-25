@@ -1,12 +1,17 @@
 #include <iostream>
 #include <string>
+#include <fstream>
 using namespace std;
 
 struct StudProf{
+  string studentID;
   string name;
-  int age;
-  int grade_lev;
-  string course;
+  string birthday;
+  string address;
+  string gender;
+  string degreeProgram;
+  int age; // walang age na nakalagay dabs, pero pwede natin include if you want
+  int yearLevel;
 };
 
 struct Node{
