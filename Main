@@ -30,7 +30,11 @@ void studName(const StudProf& profile){
 
 void displayMenu(){//displaying the menu of our program by being in a function that can be called and looped [shaun]
     int userInput;
+<<<<<<< Updated upstream
     cout << "Welcome to Group# Student Portal\n"; // AEPS ipangalan natin, any thoughts and feelings? [oms by shaun]
+=======
+    cout << "Welcome to AEPS Student Portal\n"; // AEPS ipangalan natin, any thoughts and feelings? [oms by shaun]
+>>>>>>> Stashed changes
     cout << "-----------------------------------------\n";
     cout << "Pick from the numerous choices:\n";
     cout << "-----------------------------------------\n";
@@ -177,7 +181,7 @@ void deleteRecords(fstream &file) {
 
 
 void exitProgram(){//display neto yung exit program natin [shaun]
-    cout << "Thank you for using Group# Student Portal\n";
+    cout << "Thank you for using AEPS Student Portal\n";
     cout << "Group Members:\n";
     cout << "-----------------------------------------\n";
     cout << "1. Azarraga, Dwayne Antoine Benjamin C.\n";
